@@ -8,5 +8,5 @@
 */
 
 Route::get('/{param}', function() {
-    return view('welcome');
+    return view('home');
   })->where('param', '.+');

@@ -17,6 +17,8 @@ class UsersTableSeeder extends Seeder
             'nome' => 'Rafael Moura',
             'email' => 'admin@gmail.com',
             'senha' => bcrypt('123456'),
+            'status' => 1,
+            'profile' => 'Administrador',
         ]);
     }
 }
