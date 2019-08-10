@@ -8,13 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 
+use App\User;
 
 class AdministratorApiController extends Controller
 {
 
+    private $user;
+
+    public function __construct(User $user) {
+        $this->user = $user;
+    }
+
+
     public function index()
     {
-        $users = DB::table('users')->get();
+        $users = DB::table('users')->where('profile', 'Administrador')->get();
         return response()->json($users);
     }
  
@@ -26,9 +34,9 @@ class AdministratorApiController extends Controller
         $data['senha'] = bcrypt($data['senha']);
         $data['status'] = 1;
         $data['profile'] = 'Administrador';
-        $data['created_at'] = $date = date('Y-m-d H:i:s', strtotime('Wed, 21 Jul 2010 00:28:50 GMT'));
+        $data['created_at'] = date('Y-m-d H:i:s', strtotime('Wed, 21 Jul 2010 00:28:50 GMT'));
 
-        $user = DB::table('users')->insert($data);
+        $user = $this->user->create($data); 
 
         if($user) {
             return response()->json('Usuário salvo com sucesso!');
