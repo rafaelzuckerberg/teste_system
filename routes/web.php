@@ -10,3 +10,4 @@
 Route::get('/{param}', function() {
     return view('home');
   })->where('param', '.+');
+ 

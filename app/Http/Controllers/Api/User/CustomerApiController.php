@@ -36,12 +36,12 @@ class CustomerApiController extends Controller
 
     public function store(Request $request)
     {  
-
+        // return response()->json($request->all());
         $user = $this->user
                 ->create([
                     'nome'          =>      $request['nome'],
                     'email'         =>      $request['email'],
-                    'senha'         =>      bcrypt($request['senha']),
+                    'password'         =>      bcrypt($request['password']),
                     'status'        =>      1,
                     'profile'       =>      'Cliente',
                     'created_at'    =>      date('Y-m-d H:i:s', strtotime('Wed, 21 Jul 2010 00:28:50 GMT')),
@@ -65,7 +65,15 @@ class CustomerApiController extends Controller
                     'valor_cliente_negociacao'          =>          $request['valor_cliente_negociacao'],      
                     'valor_proposto_negociacao'         =>          $request['valor_proposto_negociacao'],      
                     'valor_negociado_negociacao'        =>          $request['valor_negociado_negociacao'],      
-                    'valor_negociadoC_negociacao'       =>          $request['valor_negociadoC_negociacao'],      
+                    'valor_negociadoC_negociacao'       =>          $request['valor_negociadoC_negociacao'], 
+                    
+                    'fk_id_pais'                        =>          $request['fk_id_pais'],
+                    'fk_id_regiao'                      =>          $request['fk_id_regiao'],
+                    'fk_id_estado'                      =>          $request['fk_id_estado'],
+                    'fk_id_cidade'                      =>          $request['fk_id_cidade'],
+                    'fk_id_bairro'                      =>          $request['fk_id_bairro'],
+                    'fk_id_logradouro'                  =>          $request['fk_id_logradouro'],
+
                     'complemento_endereco'              =>          $request['complemento_endereco'],      
                     'numero'                            =>          $request['numero'],      
                 ]); 
@@ -84,16 +92,16 @@ class CustomerApiController extends Controller
         $user = $this->user->find($id);  
         $customer = $this->customer->where('user_id', $id)->first(); 
 
-        if(empty($request['senha'])) {
-            unset($request['senha']);
+        if(empty($request['password'])) {
+            unset($request['password']);
         } else {
-            $request['senha'] = bcrypt($request['senha']);
+            $request['password'] = bcrypt($request['password']);
         }
-        $update = $user->update($request->only('id', 'nome', 'email', 'senha', 'status', 'updated_at'));
+        $update = $user->update($request->only('id', 'nome', 'email', 'password', 'status', 'updated_at'));
 
-        $_update = $customer->update($request->except('id', 'nome', 'email', 'senha', 'status', 'updated_at')); 
+        $_update = $customer->update($request->except('id', 'nome', 'email', 'password', 'status', 'updated_at')); 
 
-        if($update) {
+        if($update || $_update) {
             return response()->json('Usuário atualizado com sucesso!');
         } else {
             return response()->json('Não foi possível atualizar este usuário!');

@@ -27,6 +27,24 @@ class CreateCustomersTable extends Migration
             $table->string('responsavel2_telefone')->nullable();
             $table->string('responsavel2_celular')->nullable();
             $table->string('responsavel2_email')->nullable();
+
+            $table->integer('fk_id_pais')->unsigned();
+            $table->foreign('fk_id_pais')->references('id')->on('states')->onDelete('cascade');
+
+            $table->integer('fk_id_regiao')->unsigned();
+            $table->foreign('fk_id_regiao')->references('id')->on('regions')->onDelete('cascade');
+
+            $table->integer('fk_id_estado')->unsigned();
+            $table->foreign('fk_id_estado')->references('id')->on('states')->onDelete('cascade');
+
+            $table->integer('fk_id_cidade')->unsigned();
+            $table->foreign('fk_id_cidade')->references('id')->on('cities')->onDelete('cascade');
+
+            $table->integer('fk_id_bairro')->unsigned();
+            $table->foreign('fk_id_bairro')->references('id')->on('districts')->onDelete('cascade');
+
+            $table->string('fk_id_logradouro')->nullable();
+            
             
             $table->string('valor_cliente_parecer')->nullable();
             $table->string('valor_fornecedor_parecer')->nullable();
