@@ -177,8 +177,7 @@ return [
 
         /*
          * API Authentication Providers...
-         */
-        // Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+         */ 
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
     ],
@@ -234,9 +233,7 @@ return [
 
         /*
          * API Authentication Aliases...
-         */
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class, 
+         */ 
     ],
 
 ];
