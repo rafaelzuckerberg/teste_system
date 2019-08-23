@@ -15,8 +15,8 @@ class CorsMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if($request->is('api/*') && \App::environment('local')) {
-            header('Access-Control-Allow-Origin: http://testesystem.herokuapp.com');
+        if($request->is('api/v1/*') && \App::environment('local')) {
+            header('Access-Control-Allow-Origin: https://testesystem.herokuapp.com');
             header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE');
             header('Access-Control-Allow-Headers: Content-Type');
           }
