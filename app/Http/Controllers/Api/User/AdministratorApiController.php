@@ -31,7 +31,7 @@ class AdministratorApiController extends Controller
     public function store(Request $request)
     {   
         $data = $request->all();
-        $data['senha'] = bcrypt($data['senha']);
+        $data['password'] = bcrypt($data['password']);
         $data['status'] = 1;
         $data['profile'] = 'Administrador';
         $data['created_at'] = date('Y-m-d H:i:s', strtotime('Wed, 21 Jul 2010 00:28:50 GMT'));
@@ -51,10 +51,10 @@ class AdministratorApiController extends Controller
     {
         $user = DB::table('users')->where('id', $id); 
 
-        if(empty($request['senha'])) {
-            unset($request['senha']);
+        if(empty($request['password'])) {
+            unset($request['password']);
         } else {
-            $request['senha'] = bcrypt($request['senha']);
+            $request['password'] = bcrypt($request['password']);
         }
 
         $update = $user->update($request->all());
